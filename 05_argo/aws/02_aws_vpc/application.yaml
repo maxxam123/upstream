@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app-of-apps-2
+  namespace: argocd
+spec:
+  destination:
+    namespace: argocd
+    server: https://...
+  project: default
+  source:
+    path: 04_git/aws/01_vpc/02_aws_vpc/03_application
+    repoURL: https://github.com/maxxam123/gitops.git
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
