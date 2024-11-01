@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Secret
 metadata:
-  name: 02_aws_vpc
+  name: 02-aws-vpc
   namespace: argocd
   labels:
     argocd.argoproj.io/secret-type: cluster
 type: Opaque
 stringData:
-  name: 02_aws_vpc
+  name: 02-aws-vpc
   server: https://5697728EE4F3190486E69349599AA52C.gr7.eu-central-1.eks.amazonaws.com:443
   config: |
     {
