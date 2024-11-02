@@ -48,7 +48,7 @@ spec:
         targetRevision: HEAD
         path: '{{.path}}'
       destination:
-        server: https://F59DA39C94ECD6635A9A7319F27F2708.gr7.eu-central-1.eks.amazonaws.com:6443
+        server: https://F59DA39C94ECD6635A9A7319F27F2708.gr7.eu-central-1.eks.amazonaws.com
         namespace: '{{.path.basename}}'
       syncPolicy:
         syncOptions:
