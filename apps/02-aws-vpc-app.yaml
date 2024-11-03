@@ -1,0 +1,55 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: bootstrap
+  namespace: argocd
+spec:
+  generators:
+  - git:
+      repoURL: https://github.com/maxxam123/gitops.git
+      revision: HEAD
+      directories:
+      - path: 04_git/aws/01_vpc/02_aws_vpc/01_bootstrap/*
+  template:
+    metadata:
+      name: '{{.path.basename}}'
+    spec:
+      project: "default"
+      source:
+        repoURL: https://github.com/maxxam123/gitops.git
+        targetRevision: HEAD
+        path: '{{.path}}'
+      destination:
+        server: https://82C736ADAF4D9BE578746D23825B87FF.gr7.eu-central-1.eks.amazonaws.com:6443
+        namespace: '{{.path.basename}}'
+      syncPolicy:
+        syncOptions:
+        - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: monitor
+  namespace: argocd
+spec:
+  generators:
+  - git:
+      repoURL: https://github.com/maxxam123/gitops.git
+      revision: HEAD
+      directories:
+      - path: 04_git/aws/01_vpc/02_aws_vpc/02_monitor/*
+  template:
+    metadata:
+      name: '{{.path.basename}}'
+    spec:
+      project: "default"
+      source:
+        repoURL: https://github.com/maxxam123/gitops.git
+        targetRevision: HEAD
+        path: '{{.path}}'
+      destination:
+        server: https://82C736ADAF4D9BE578746D23825B87FF.gr7.eu-central-1.eks.amazonaws.com:6443
+        namespace: '{{.path.basename}}'
+      syncPolicy:
+        syncOptions:
+        - CreateNamespace=true
