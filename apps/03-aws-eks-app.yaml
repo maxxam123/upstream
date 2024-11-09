@@ -6,7 +6,7 @@ metadata:
 spec:
   destination:
     namespace: argocd
-    server: https://HTTPS
+    server: https://kubernetes.default.svc
   project: default
   source:
     path: 04_git/aws/10_eks/03_aws_eks/04_application
