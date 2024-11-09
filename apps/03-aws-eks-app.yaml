@@ -1,46 +1,24 @@
-# ---
-# apiVersion: argoproj.io/v1alpha1
-# kind: Application
-# metadata:
-#   name: nginx
-#   namespace: argocd
-# spec:
-#   destination:
-#     namespace: ingress
-#     server: https://kubernetes.default.svc
-#   project: default
-#   source:
-#     # path: nginx
-#     # repoURL: 'https://github.com/maxxam123/helm.git'
-#     path: 04_git/aws/10_eks/03_aws_eks/01_bootstrap/nginx/charts/ingress-nginx
-#     repoURL: 'https://github.com/maxxam123/gitops.git'
-#     targetRevision: HEAD
-#     helm:
-#       valueFiles:
-#       # - values-ingress-nginx.yaml
-#       - values.yaml
-#   syncPolicy:
-#     automated:
-#       prune: true
-#       selfHeal: true
-#     syncOptions:
-#       - CreateNamespace=true
-#       - ServerSideApply=true
-
+---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: app-03-aws-eks
+  name: nginx
   namespace: argocd
 spec:
   destination:
-    namespace: argocd
+    namespace: ingress
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: 04_git/aws/10_eks/03_aws_eks/04_application
-    repoURL: https://github.com/maxxam123/gitops.git
+    # path: nginx
+    # repoURL: 'https://github.com/maxxam123/helm.git'
+    path: 04_git/aws/10_eks/03_aws_eks/01_bootstrap/nginx/charts/ingress-nginx
+    repoURL: 'https://github.com/maxxam123/gitops.git'
     targetRevision: HEAD
+    helm:
+      valueFiles:
+      # - values-ingress-nginx.yaml
+      - values.yaml
   syncPolicy:
     automated:
       prune: true
@@ -48,6 +26,28 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true
+
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: app-03-aws-eks
+#   namespace: argocd
+# spec:
+#   destination:
+#     namespace: argocd
+#     server: https://kubernetes.default.svc
+#   project: default
+#   source:
+#     path: 04_git/aws/10_eks/03_aws_eks/04_application
+#     repoURL: https://github.com/maxxam123/gitops.git
+#     targetRevision: HEAD
+#   syncPolicy:
+#     automated:
+#       prune: true
+#       selfHeal: true
+#     syncOptions:
+#       - CreateNamespace=true
+#       - ServerSideApply=true
 
 # apiVersion: argoproj.io/v1alpha1
 # kind: ApplicationSet
