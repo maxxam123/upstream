@@ -1,21 +1,21 @@
-# apiVersion: argoproj.io/v1alpha1
-# kind: Application
-# metadata:
-#   name: app-03-aws-eks
-#   namespace: argocd
-# spec:
-#   destination:
-#     namespace: argocd
-#     server: https://kubernetes.default.svc
-#   project: default
-#   source:
-#     path: 04_git/aws/10_eks/03_aws_eks/04_application
-#     repoURL: https://github.com/maxxam123/gitops.git
-#     targetRevision: HEAD
-#   syncPolicy:
-#     automated:
-#       prune: true
-#       selfHeal: true
-#     syncOptions:
-#       - CreateNamespace=true
-#       - ServerSideApply=true
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app-02-aws-eks
+  namespace: argocd
+spec:
+  destination:
+    namespace: argocd
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: 04_git/aws/10_eks/02_aws_eks/04_application
+    repoURL: https://github.com/maxxam123/gitops.git
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
