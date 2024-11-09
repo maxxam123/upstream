@@ -1,23 +1,19 @@
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: nginx
+  name: ingress-nginx-03-aws-eks
   namespace: argocd
 spec:
   destination:
     namespace: ingress
     server: https://kubernetes.default.svc
   project: default
-  source:
-    # path: nginx
-    # repoURL: 'https://github.com/maxxam123/helm.git'
+source:
     path: 04_git/aws/10_eks/03_aws_eks/01_bootstrap/nginx/charts/ingress-nginx
     repoURL: 'https://github.com/maxxam123/gitops.git'
     targetRevision: HEAD
     helm:
       valueFiles:
-      # - values-ingress-nginx.yaml
       - values.yaml
   syncPolicy:
     automated:
@@ -26,53 +22,4 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true
-
-# apiVersion: argoproj.io/v1alpha1
-# kind: Application
-# metadata:
-#   name: app-03-aws-eks
-#   namespace: argocd
-# spec:
-#   destination:
-#     namespace: argocd
-#     server: https://kubernetes.default.svc
-#   project: default
-#   source:
-#     path: 04_git/aws/10_eks/03_aws_eks/04_application
-#     repoURL: https://github.com/maxxam123/gitops.git
-#     targetRevision: HEAD
-#   syncPolicy:
-#     automated:
-#       prune: true
-#       selfHeal: true
-#     syncOptions:
-#       - CreateNamespace=true
-#       - ServerSideApply=true
-
-# apiVersion: argoproj.io/v1alpha1
-# kind: ApplicationSet
-# metadata:
-#   name: monitor
-#   namespace: argocd
-# spec:
-#   generators:
-#   - git:
-#       repoURL: https://github.com/maxxam123/gitops.git
-#       revision: HEAD
-#       directories:
-#       - path: 04_git/aws/10_eks/03_aws_eks/02_monitor/*
-#   template:
-#     metadata:
-#       name: '{{.path.basename}}'
-#     spec:
-#       project: "default"
-#       source:
-#         repoURL: https://github.com/maxxam123/gitops.git
-#         targetRevision: HEAD
-#         path: '{{.path}}'
-#       destination:
-#         server: https://HTTPS:6443
-#         namespace: '{{.path.basename}}'
-#       syncPolicy:
-#         syncOptions:
-#         - CreateNamespace=true
+      
