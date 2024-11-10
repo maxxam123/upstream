@@ -42,7 +42,9 @@ spec:
     repoURL: https://github.com/maxxam123/gitops.git
     targetRevision: HEAD
   syncPolicy:
-    automated: {}
+    automated:
+      prune: true
+      selfHeal: true
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true
