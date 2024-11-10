@@ -22,32 +22,32 @@ source:
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true
-# ---
-# apiVersion: argoproj.io/v1alpha1
-# kind: Application
-# metadata:
-#   name: cert-manager
-#   namespace: argocd
-# spec:
-#   destination:
-#     namespace: cert-manager
-#     server: https://kubernetes.default.svc
-#   project: default
-#   source:
-#     chart: cert-manager
-#     repoURL: 'https://charts.jetstack.io'
-#     targetRevision: '1.16.1'
-#     helm:
-#       parameters:
-#       - name: "installCRDs"
-#         value: "true"
-#   syncPolicy:
-#     automated:
-#       prune: true
-#       selfHeal: true
-#     syncOptions:
-#       - CreateNamespace=true
-#       - ServerSideApply=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cert-manager
+  namespace: argocd
+spec:
+  destination:
+    namespace: cert-manager
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    chart: cert-manager
+    repoURL: 'https://charts.jetstack.io'
+    targetRevision: '1.16.1'
+    helm:
+      parameters:
+      - name: "installCRDs"
+        value: "true"
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
 # ---
 # apiVersion: argoproj.io/v1alpha1
 # kind: Application
