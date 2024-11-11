@@ -3,7 +3,8 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: ingress-nginx-03-aws-eks
-  namespace: argocd
+  # namespace: argocd
+  namespace: default  
 spec:
   destination:
     namespace: ingress
@@ -29,7 +30,8 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: cert-manager-03-aws-eks
-  namespace: argocd
+  # namespace: argocd
+  namespace: default
 spec:
   destination:
     namespace: cert-manager
@@ -49,55 +51,29 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true
-# ---
-# apiVersion: argoproj.io/v1alpha1
-# kind: Application
-# metadata:
-#   name: vault-03-aws-eks
-#   # namespace: argocd
-#   namespace: default
-# spec:
-#   destination:
-#     namespace: vault
-#     server: https://kubernetes.default.svc
-#   project: default
-#   source:
-#     helm:
-#       valueFiles:
-#       - values.yaml
-#     path: 04_git/aws/10_eks/03_aws_eks/01_bootstrap/vault/charts/vault
-#     repoURL: 'https://github.com/maxxam123/gitops.git'
-#     targetRevision: HEAD
-#   syncPolicy:
-#     automated:
-#       prune: true
-#       selfHeal: true
-#     syncOptions:
-#       - CreateNamespace=true
-#       - ServerSideApply=true
-# ---
-# apiVersion: argoproj.io/v1alpha1
-# kind: Application
-# metadata:
-#   name: vault-03-aws-eks
-#   # namespace: argocd
-#   namespace: default
-# spec:
-#   destination:
-#     namespace: vault
-#     server: https://kubernetes.default.svc
-#   project: default
-#   source:
-#     helm:
-#       valueFiles:
-#       - values.yaml
-#     path: 04_git/aws/10_eks/03_aws_eks/01_bootstrap/vault/charts/vault
-#     repoURL: 'https://github.com/maxxam123/gitops.git'
-#     targetRevision: HEAD
-#   syncPolicy:
-#     automated:
-#       prune: true
-#       selfHeal: true
-#     syncOptions:
-#       - CreateNamespace=true
-#       - ServerSideApply=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vault-03-aws-eks
+  # namespace: argocd
+  namespace: default
+spec:
+  destination:
+    namespace: vault
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    helm:
+      valueFiles:
+      - values.yaml
+    path: 04_git/aws/10_eks/03_aws_eks/01_bootstrap/vault/charts/vault
+    repoURL: 'https://github.com/maxxam123/gitops.git'
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
