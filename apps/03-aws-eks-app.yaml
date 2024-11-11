@@ -9,13 +9,10 @@ spec:
     namespace: default
     server: https://kubernetes.default.svc
   project: default
-source:
-  path: 04_git/aws/10_eks/03_aws_eks/01_bootstrap/argo/yaml
-  repoURL: 'https://github.com/maxxam123/gitops.git'
-  targetRevision: HEAD
-  # helm:
-  #   valueFiles:
-  #   - values.yaml
+  source:
+    path: 04_git/aws/10_eks/03_aws_eks/01_bootstrap/argo/yaml
+    repoURL: 'https://github.com/maxxam123/gitops.git'
+    targetRevision: HEAD
   syncPolicy:
     automated:
       prune: true
@@ -23,7 +20,6 @@ source:
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true
-      
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
