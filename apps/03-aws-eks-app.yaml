@@ -50,32 +50,32 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true
-# ---
-# apiVersion: argoproj.io/v1alpha1
-# kind: Application
-# metadata:
-#   name: umbrella
-#   # namespace: argocd
-#   namespace: default
-# spec:
-#   destination:
-#     namespace: vault
-#     server: https://kubernetes.default.svc
-#   project: default
-#   source:
-#     helm:
-#       valueFiles:
-#       - vault.yaml
-#     path: umbrella
-#     repoURL: 'https://github.com/maxxam123/helm.git'
-#     targetRevision: HEAD
-#   syncPolicy:
-#     automated:
-#       prune: true
-#       selfHeal: true
-#     syncOptions:
-#       - CreateNamespace=true
-#       - ServerSideApply=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: umbrella
+  # namespace: argocd
+  namespace: default
+spec:
+  destination:
+    namespace: vault
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    helm:
+      valueFiles:
+      - vault.yaml
+    path: umbrella
+    repoURL: 'https://github.com/maxxam123/helm.git'
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
 # ---
 # apiVersion: argoproj.io/v1alpha1
 # kind: Application
