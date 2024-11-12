@@ -127,7 +127,7 @@ metadata:
   namespace: default
 spec:
   destination:
-    namespace: velero
+    namespace: default
     server: https://kubernetes.default.svc
   project: default
   source:
@@ -152,7 +152,7 @@ metadata:
   namespace: default  
 spec:
   destination:
-    namespace: velero
+    namespace: default
     server: https://kubernetes.default.svc
   project: default
   source:
