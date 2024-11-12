@@ -3,8 +3,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: ingress-nginx-03-aws-eks
-  # namespace: argocd
-  namespace: default
+  namespace: default 
 spec:
   destination:
     namespace: ingress
