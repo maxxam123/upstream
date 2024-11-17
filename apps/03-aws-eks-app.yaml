@@ -192,7 +192,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd-user-FILE
+  name: argocd-user-03-aws-eks
   namespace: default  
 spec:
   destination:
