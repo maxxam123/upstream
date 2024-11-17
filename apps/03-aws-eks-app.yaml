@@ -188,42 +188,22 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true
-# ---
-# apiVersion: argoproj.io/v1alpha1
-# kind: Application
-# metadata:
-#   name: argocd-user-03-aws-eks
-#   namespace: default  
-# spec:
-#   destination:
-#     namespace: default
-#     server: https://kubernetes.default.svc
-#   project: default
-#   source:
-#     path: 04_git/aws/10_eks/03_aws_eks/01_bootstrap/argo/user
-#     repoURL: 'https://github.com/maxxam123/gitops.git'
-#     targetRevision: HEAD
-#   syncPolicy:
-#     automated:
-#       prune: true
-#       selfHeal: true
-#     syncOptions:
-#       - CreateNamespace=true
-#       - ServerSideApply=true
-#       - Replace=true
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: kustomization-03-aws-eks
-  namespace: default  
+  name: loki-03-aws-eks
+  namespace: default
 spec:
   destination:
-    namespace: monitoring
+    namespace: loki
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: 04_git/aws/10_eks/03_aws_eks/02_monitor/prometheus/charts/prometheus
+    helm:
+      valueFiles:
+      - values.yaml
+    path: 04_git/aws/10_eks/03_aws_eks/02_monitor/loki/charts/loki
     repoURL: 'https://github.com/maxxam123/gitops.git'
     targetRevision: HEAD
   syncPolicy:
@@ -233,28 +213,3 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true
-# ---
-# apiVersion: argoproj.io/v1alpha1
-# kind: Application
-# metadata:
-#   name: loki-03-aws-eks
-#   namespace: default
-# spec:
-#   destination:
-#     namespace: loki
-#     server: https://kubernetes.default.svc
-#   project: default
-#   source:
-#     helm:
-#       valueFiles:
-#       - values.yaml
-#     path: 04_git/aws/10_eks/03_aws_eks/02_monitor/loki/charts/loki
-#     repoURL: 'https://github.com/maxxam123/gitops.git'
-#     targetRevision: HEAD
-#   syncPolicy:
-#     automated:
-#       prune: true
-#       selfHeal: true
-#     syncOptions:
-#       - CreateNamespace=true
-#       - ServerSideApply=true
