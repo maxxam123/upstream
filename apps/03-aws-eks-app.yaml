@@ -46,6 +46,29 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
+  name: argocd-user-03-aws-eks
+  namespace: default  
+spec:
+  destination:
+    namespace: default
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: 04_git/aws/10_eks/03_aws_eks/01_bootstrap/argo/user
+    repoURL: 'https://github.com/maxxam123/gitops.git'
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+      - Replace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
   name: ingress-nginx-03-aws-eks
   # namespace: argocd
   namespace: default
@@ -188,53 +211,78 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true
-# ---
-# apiVersion: argoproj.io/v1alpha1
-# kind: Application
-# metadata:
-#   name: kustomization-03-aws-eks
-#   namespace: default  
-# spec:
-#   destination:
-#     namespace: monitoring
-#     server: https://kubernetes.default.svc
-#   project: default
-#   source:
-#     helm:
-#       valueFiles:
-#       - values.yaml
-#     path: 04_git/aws/10_eks/03_aws_eks/02_monitor/prometheus/charts/prometheus
-#     repoURL: 'https://github.com/maxxam123/gitops.git'
-#     targetRevision: HEAD
-#   syncPolicy:
-#     automated:
-#       prune: true
-#       selfHeal: true
-#     syncOptions:
-#       - CreateNamespace=true
-#       - ServerSideApply=true
-# ---
-# apiVersion: argoproj.io/v1alpha1
-# kind: Application
-# metadata:
-#   name: loki-03-aws-eks
-#   namespace: default
-# spec:
-#   destination:
-#     namespace: loki
-#     server: https://kubernetes.default.svc
-#   project: default
-#   source:
-#     helm:
-#       valueFiles:
-#       - values.yaml
-#     path: 04_git/aws/10_eks/03_aws_eks/02_monitor/loki/charts/loki
-#     repoURL: 'https://github.com/maxxam123/gitops.git'
-#     targetRevision: HEAD
-#   syncPolicy:
-#     automated:
-#       prune: true
-#       selfHeal: true
-#     syncOptions:
-#       - CreateNamespace=true
-#       - ServerSideApply=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: loki-03-aws-eks
+  namespace: default
+spec:
+  destination:
+    namespace: loki
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    helm:
+      valueFiles:
+      - values.yaml
+    path: 04_git/aws/10_eks/03_aws_eks/02_monitor/loki/charts/loki
+    repoURL: 'https://github.com/maxxam123/gitops.git'
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: lb-03-aws-eks
+  namespace: default
+spec:
+  destination:
+    namespace: kube-system
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    helm:
+      valueFiles:
+      - values.yaml
+    path: 04_git/aws/10_eks/03_aws_eks/01_bootstrap/lb/charts/lb
+    repoURL: 'https://github.com/maxxam123/gitops.git'
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: autoscaler-03-aws-eks
+  namespace: default
+spec:
+  destination:
+    namespace: kube-system
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    helm:
+      valueFiles:
+      - values.yaml
+    path: 04_git/aws/10_eks/03_aws_eks/01_bootstrap/autoscaler/charts/autoscaler
+    repoURL: 'https://github.com/maxxam123/gitops.git'
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
