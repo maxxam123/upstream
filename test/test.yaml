@@ -47,28 +47,25 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true
-# ---
-# apiVersion: argoproj.io/v1alpha1
-# kind: Application
-# metadata:
-#   name: dev-vault-ingress-02-aws-downstream
-#   namespace: default
-# spec:
-#   destination:
-#     namespace: vault
-#     server: https://D867B031AA64257715036455641CE0FD.gr7.eu-central-1.eks.amazonaws.com
-#   project: default
-#   source:
-#     helm:
-#       valueFiles:
-#       - values.yaml
-#     path: 04_git/aws/02-downstream/02-aws-downstream/01_bootstrap/vault/yaml
-#     repoURL: 'https://github.com/maxxam123/gitops.git'
-#     targetRevision: HEAD
-#   syncPolicy:
-#     automated:
-#       prune: true
-#       selfHeal: true
-#     syncOptions:
-#       - CreateNamespace=true
-#       - ServerSideApply=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: dev-vault-ingress-02-aws-downstream
+  namespace: default
+spec:
+  destination:
+    namespace: vault
+    server: https://D867B031AA64257715036455641CE0FD.gr7.eu-central-1.eks.amazonaws.com
+  project: default
+  source:
+    path: 04_git/aws/02-downstream/02-aws-downstream/01_bootstrap/vault/yaml
+    repoURL: 'https://github.com/maxxam123/gitops.git'
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
