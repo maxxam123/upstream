@@ -13,7 +13,7 @@ spec:
     helm:
       valueFiles:
       - values.yaml
-    path: 04_git/aws/02-downstream/02-aws-downstream/01_bootstrap/vault/yaml
+    path: 04_git/aws/10_eks/03_aws_eks/01_bootstrap/vault/yaml
     repoURL: 'https://github.com/maxxam123/gitops.git'
     targetRevision: HEAD
   syncPolicy:
