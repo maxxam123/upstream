@@ -1,3 +1,29 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: 01-aws-upstream-nginx-helm
+  namespace: default
+spec:
+  destination:
+    namespace: ingress
+    server: https://kubernetes.default.svc
+    # server: https://HTTPS
+  project: default
+  source:
+    helm:
+      valueFiles:
+      - values.yaml
+    path: 04_git/aws/01-upstream/01-aws-upstream/bootstrap/ingress-nginx/charts
+    repoURL: 'https://github.com/maxxam123/gitops.git'
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
 # apiVersion: argoproj.io/v1alpha1
 # kind: Application
 # metadata:
