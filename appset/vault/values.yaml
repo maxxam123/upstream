@@ -1,1 +1,8 @@
-
+vault:
+  installCRDs: true
+  ui:
+    enabled: true
+  server:
+    dev:
+      enabled: true
+    
